@@ -1,4 +1,4 @@
-from simple_lama import SimpleLama
+from .simple_lama import SimpleLama
 from PIL import Image
 from pydantic import BaseModel, ConfigDict
 from io import BytesIO

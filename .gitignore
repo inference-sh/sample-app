@@ -1,3 +1,7 @@
+# inference.sh
+*.infsh
+.infsh/
+
 # Python
 __pycache__/
 *.py[cod]
