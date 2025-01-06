@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "inference.sh API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/predict": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "image": {
+                    "title": "Image",
+                    "type": "string"
+                  },
+                  "mask": {
+                    "title": "Mask",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "image",
+                  "mask"
+                ],
+                "title": "PredictInput",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful prediction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "image": {
+                      "title": "Image",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "image"
+                  ],
+                  "title": "PredictOutput",
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

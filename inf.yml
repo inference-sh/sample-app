@@ -1,0 +1,3 @@
+name: inference-sh/test-model
+repo: https://github.com/inference-sh/test-model.git
+version: 0.1.0
