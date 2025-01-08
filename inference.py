@@ -31,7 +31,7 @@ class App(BaseApp):
     async def setup(self):
         self.lama = SimpleLama()
 
-    async def predict(self, input_data: AppInput) -> AppOutput:
+    async def run(self, app_input: AppInput) -> AppOutput:
         # Download image and mask from URLs
         # Download and open image
         # Print a poem while loading for 10 seconds
@@ -54,10 +54,10 @@ class App(BaseApp):
                 break
             print(line)
             time.sleep(0.1)
-        image = load_image_from_url_or_path(input_data.image).convert("RGB")
+        image = load_image_from_url_or_path(app_input.image).convert("RGB")
 
         # Download and open mask
-        mask = load_image_from_url_or_path(input_data.mask).convert("L")
+        mask = load_image_from_url_or_path(app_input.mask).convert("L")
 
         result = self.lama(image, mask)
         result_path = "/tmp/result.png"
