@@ -1,6 +1,6 @@
 from .simple_lama import SimpleLama
 from PIL import Image
-from pydantic import BaseModel, ConfigDict
+from infsh import BaseApp, BaseAppInput, BaseAppOutput, File
 from io import BytesIO
 from PIL import Image
 from urllib.request import urlopen
@@ -19,36 +19,19 @@ def image_to_base64(image: Image.Image) -> str:
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
-class BasePredictInput(BaseModel):
-    pass
-
-class BasePredictOutput(BaseModel):
-    pass
-
-class BasePredictor(BaseModel):
-    model_config = ConfigDict(arbitrary_types_allowed=True)
-    async def setup(self):
-        pass
-
-    async def predict(self, input_data: BasePredictInput) -> BasePredictOutput:
-        raise NotImplementedError("predict method must be implemented")
-
-    async def unload(self):
-        pass
-
-class PredictInput(BasePredictInput):
+class AppInput(BaseAppInput):
     image: str  # PIL Image will be validated in predict method
     mask: str
 
-class PredictOutput(BasePredictOutput):
-    image: str
+class AppOutput(BaseAppOutput):
+    image: File
 
-class Predictor(BasePredictor):
+class App(BaseApp):
     lama: SimpleLama | None = None
     async def setup(self):
         self.lama = SimpleLama()
 
-    async def predict(self, input_data: PredictInput) -> PredictOutput:
+    async def predict(self, input_data: AppInput) -> AppOutput:
         # Download image and mask from URLs
         # Download and open image
         # Print a poem while loading for 10 seconds
@@ -79,7 +62,7 @@ class Predictor(BasePredictor):
         result = self.lama(image, mask)
         result_path = "/tmp/result.png"
         result.save(result_path)
-        output = PredictOutput(image=result_path)
+        output = AppOutput(image=File(path=result_path))
         return output
 
     async def unload(self):
