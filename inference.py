@@ -20,8 +20,8 @@ def image_to_base64(image: Image.Image) -> str:
     return base64.b64encode(buffered.getvalue()).decode('utf-8')
 
 class AppInput(BaseAppInput):
-    image: str  # PIL Image will be validated in predict method
-    mask: str
+    image: File
+    mask: File
 
 class AppOutput(BaseAppOutput):
     image: File
@@ -54,10 +54,10 @@ class App(BaseApp):
                 break
             print(line)
             time.sleep(0.1)
-        image = load_image_from_url_or_path(app_input.image).convert("RGB")
+        image = load_image_from_url_or_path(app_input.image.path).convert("RGB")
 
         # Download and open mask
-        mask = load_image_from_url_or_path(app_input.mask).convert("L")
+        mask = load_image_from_url_or_path(app_input.mask.path).convert("L")
 
         result = self.lama(image, mask)
         result_path = "/tmp/result.png"
