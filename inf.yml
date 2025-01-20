@@ -1,3 +1,4 @@
 name: sample-app
-repo: https://github.com/inference-sh/sample-app.git
+description: A sample app for inference.sh
+repository: https://github.com/inference-sh/sample-app.git
 version: 0.1.0
