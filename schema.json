@@ -1,0 +1,84 @@
+{
+  "input": {
+    "properties": {
+      "image": {
+        "title": "Image",
+        "type": "string"
+      },
+      "mask": {
+        "title": "Mask",
+        "type": "string"
+      }
+    },
+    "required": [
+      "image",
+      "mask"
+    ],
+    "title": "AppInput",
+    "type": "object"
+  },
+  "output": {
+    "$defs": {
+      "File": {
+        "description": "A class representing a file in the inference.sh ecosystem.\n\nThis class is used to standardize file handling between the worker and API,\nparticularly for outputs that need to be moved out of containers and uploaded.",
+        "properties": {
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "mime_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Mime Type"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Size"
+          },
+          "filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Filename"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "File",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "image": {
+        "$ref": "#/$defs/File"
+      }
+    },
+    "required": [
+      "image"
+    ],
+    "title": "AppOutput",
+    "type": "object"
+  }
+}
