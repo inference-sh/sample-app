@@ -1,4 +1,4 @@
-name: sample-app
-description: A sample app for inference.sh
+name: sam-poetry
+description: Generate poetry and mask with SAM
 repository: https://github.com/inference-sh/sample-app.git
 version: 0.1.0
