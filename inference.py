@@ -1,6 +1,6 @@
 from .simple_lama import SimpleLama
 from PIL import Image
-from infsh import BaseApp, BaseAppInput, BaseAppOutput, File
+from inferencesh import BaseApp, BaseAppInput, BaseAppOutput, File
 from io import BytesIO
 from PIL import Image
 import time
